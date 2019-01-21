@@ -3,11 +3,7 @@ package com.creeperface.nukkitx.colormatch.lang;
 import cn.nukkit.utils.Config;
 import com.creeperface.nukkitx.colormatch.ColorMatch;
 
-import java.util.Map;
-
 public class BaseLang extends Config {
-
-    private Map<String, Map<String, String>> messages = null;
 
     public boolean init(String path) {
         return load(path, Config.YAML);

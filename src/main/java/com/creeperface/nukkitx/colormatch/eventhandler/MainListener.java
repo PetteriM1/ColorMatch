@@ -35,8 +35,6 @@ public class MainListener implements Listener {
 
     private List<String> acceptQueue = new ArrayList<>();
 
-    private Map<String, Integer> setters = new HashMap<>();
-
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();

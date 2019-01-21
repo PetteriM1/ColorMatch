@@ -19,12 +19,12 @@ public class ArenaBuilder {
 
         AxisAlignedBB bb = cfg.getFloor();
 
-        int minX = (int) bb.getMinX() - 1;
-        int minY = (int) bb.getMinY();
-        int minZ = (int) bb.getMinZ() - 1;
-        int maxX = (int) bb.getMaxX() + 1;
-        int maxY = (int) bb.getMaxY();
-        int maxZ = (int) bb.getMaxZ() + 1;
+        int minX = (int) bb.minX - 1;
+        int minY = (int) bb.minY;
+        int minZ = (int) bb.minZ - 1;
+        int maxX = (int) bb.maxX + 1;
+        int maxY = (int) bb.maxY;
+        int maxZ = (int) bb.maxZ + 1;
 
         if (minY < 5) {
             return ColorMatch.getInstance().getLanguage().translateString("arena_builder.failure");

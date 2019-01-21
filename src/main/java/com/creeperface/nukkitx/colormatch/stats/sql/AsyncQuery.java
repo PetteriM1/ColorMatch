@@ -64,23 +64,26 @@ public class AsyncQuery extends AsyncTask {
         if (databaseType == DbType.MYSQL) {
             c = connect();
         } else {
-            c = DbLib.getSQLiteConnection(ColorMatch.getInstance(), SQLStatsProvider.dbFileName);
+            //c = DbLib.getSQLiteConnection(ColorMatch.getInstance(), SQLStatsProvider.dbFileName);
+            c = null;
         }
 
         return c;
     }
 
     protected Connection getSQLite3Connection() {
-        return DbLib.getSQLiteConnection(ColorMatch.getInstance(), "stats.db");
+        //return DbLib.getSQLiteConnection(ColorMatch.getInstance(), "stats.db");
+        return null;
     }
 
     private Connection connect() {
-        try {
+        /*try {
             Class.forName("com.mysql.jdbc.Driver");
             return DriverManager.getConnection(DbLib.getUrlFromConfig(null));
         } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
             return null;
-        }
+        }*/
+        return null;
     }
 }

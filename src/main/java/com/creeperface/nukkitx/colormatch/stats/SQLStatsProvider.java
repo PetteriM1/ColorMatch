@@ -51,7 +51,7 @@ public abstract class SQLStatsProvider implements StatsProvider {
     }
 
     private Connection getConnection() {
-        try {
+        /*try {
             if (databaseType == DbType.MYSQL) {
                 Class.forName("com.mysql.jdbc.Driver");
                 return DriverManager.getConnection(DbLib.getUrlFromConfig(null));
@@ -61,7 +61,8 @@ public abstract class SQLStatsProvider implements StatsProvider {
         } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
             return null;
-        }
+        }*/
+        return null;
     }
 
     private class UpdateStatsTask extends AsyncQuery {

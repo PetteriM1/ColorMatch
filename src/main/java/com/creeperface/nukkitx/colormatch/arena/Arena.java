@@ -404,15 +404,15 @@ public class Arena extends ArenaManager implements Listener {
         int colorCount = 0;
         int blockCount = 0;
 
-        int floorSize = (int) (((floor.getMaxX() - floor.getMinX() + 1) / 3) * ((floor.getMaxZ() - floor.getMinZ() + 1) / 3));
+        int floorSize = (int) (((floor.maxX - floor.minX + 1) / 3) * ((floor.maxZ - floor.minZ + 1) / 3));
 
         int randomBlock = random.nextInt(floorSize);
         int maxColorCount = floorSize / 25;
 
         //System.out.println("floor size: "+floorSize+"        max count: "+maxColorCount);
 
-        for (int x = (int) getFloor().getMinX() + 1; x <= getFloor().getMaxX() - 1; x += 3) {
-            for (int z = (int) getFloor().getMinZ() + 1; z <= getFloor().getMaxZ() - 1; z += 3) {
+        for (int x = (int) getFloor().minX + 1; x <= getFloor().maxX - 1; x += 3) {
+            for (int z = (int) getFloor().minZ + 1; z <= getFloor().maxZ - 1; z += 3) {
                 int color = random.nextInt(15);
 
                 int minX = x - 1;
@@ -463,8 +463,8 @@ public class Arena extends ArenaManager implements Listener {
             }
         }*/
 
-        for (int x = (int) getFloor().getMinX() + 1; x <= getFloor().getMaxX() - 1; x += 3) {
-            for (int z = (int) getFloor().getMinZ() + 1; z <= getFloor().getMaxZ() - 1; z += 3) {
+        for (int x = (int) getFloor().minX + 1; x <= getFloor().maxX - 1; x += 3) {
+            for (int z = (int) getFloor().minZ + 1; z <= getFloor().maxZ - 1; z += 3) {
                 int minX = x - 1;
                 int minZ = z - 1;
                 int maxX = x + 1;
