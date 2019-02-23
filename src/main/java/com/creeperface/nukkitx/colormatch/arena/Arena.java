@@ -272,7 +272,7 @@ public class Arena extends ArenaManager implements Listener {
 
         this.bossBar.addPlayer(p);
 
-        p.setGamemode(0);
+        p.setGamemode(2);
         p.sendMessage(plugin.getLanguage().translateString("game.join", getName()));
 
         //p.setDisplayName(TextFormat.GRAY + "[" + TextFormat.GREEN + "GAME" + TextFormat.GRAY + "] " + TextFormat.WHITE + TextFormat.RESET + " " + p.getDisplayName());
@@ -345,7 +345,7 @@ public class Arena extends ArenaManager implements Listener {
         resetPlayer(p);
         p.teleport(getSpectatorPos().add(0.5, 0, 0.5));
         p.sendMessage(plugin.getLanguage().translateString("game.join_spectator"));
-        p.setGamemode(0);
+        p.setGamemode(3);
         bossBar.addPlayer(p);
         bossBar.updateInfo();
         //p.setDisplayName(TextFormat.GRAY + "[" + TextFormat.YELLOW + "SPECTATOR" + TextFormat.GRAY + "] " + TextFormat.WHITE + TextFormat.RESET + " " + p.getDisplayName());

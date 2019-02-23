@@ -101,7 +101,7 @@ setupmode:
   enable: "&eYou are now editing arena &9%0"
   continue: "&eYou can continue in configuring the arena"
   continue_join: "&eYou are configuring an arena %0"
-  save: "&aArena successfully saved. Type &e/cm enable %0 &a  to load the arena"
+  save: "&aArena successfully saved. Type &e/cm enable %0 &a to load the arena"
   joinsign: "&aSet join sign position to &eX: &9%0 &eY: &9%1 &eZ: &9%2"
   startpos: "&aSet start position to &eX: &9%0 &eY: &9%1 &eZ: &9%2"
   floorpos: "&aSet floor position to &eX: &9%0 &eY: &9%1 &eZ: &9%2"
