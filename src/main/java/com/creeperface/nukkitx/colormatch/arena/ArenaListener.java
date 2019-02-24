@@ -252,4 +252,15 @@ class ArenaListener implements Listener {
             e.setCancelled();
         }
     }
+
+    @EventHandler
+    public void onTeleport(PlayerTeleportEvent e) {
+        Player p = e.getPlayer();
+
+        if (!e.getTo().getLevel().equals(plugin.level) && e.getFrom().getLevel().equals(plugin.level)) {
+            if (plugin.inArena(p) || plugin.isSpectator(p)) {
+                plugin.removeFromArena(p);
+            }
+        }
+    }
 }
