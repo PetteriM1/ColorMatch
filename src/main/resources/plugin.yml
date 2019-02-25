@@ -11,7 +11,7 @@ commands:
   colormatch:
     description: "Main ColorMatch command"
     permission: "colormatch.command"
-    default: "op"
+    default: "true"
     aliases: ["cm"]
 
 permissions:
@@ -31,48 +31,47 @@ permissions:
     description: "allows player to use other commands in game"
     default: op
   colormatch.command:
-    description: "allows player to use all ColorMatch commands"
+    description: "allows player to use commands"
+    default: true
+  colormatch.command.start:
+    description: "allows player to force start the arena"
     default: op
-    children:
-      colormatch.command.start:
-        description: "allows player to force start the arena"
-        default: op
-      colormatch.command.stop:
-        description: "allows player to force stop the arena"
-        default: op
-      colormatch.command.enable:
-        description: "allows player to enable an arena"
-        default: op
-      colormatch.command.disable:
-        description: "allows player to disable an arena"
-        default: op
-      colormatch.command.join:
-        description: "allows player to join to arena"
-        default: true
-      colormatch.command.leave:
-        description: "allows player to leave an arena"
-        default: true
-      colormatch.command.create:
-        description: "allows player to create a new arena"
-        default: op
-      colormatch.command.remove:
-        description: "allows player to remove an arena"
-        default: op
-      colormatch.command.configure:
-        description: "allows player to configure an arena"
-        default: op
-      colormatch.command.help:
-        description: "allows player to see all avalaible ColorMatch commands"
-        default: true
-      colormatch.command.build:
-        description: "allows player to see all avalaible ColorMatch commands"
-        default: op
-      colormatch.command.stats:
-        description: "allows player to see all avalaible ColorMatch commands"
-        default: true
-      colormatch.command.setlobby:
-        description: "allows player to change the default ColorMatch lobby"
-        default: op
-      colormatch.command.list:
-        description: "shows all available arenas"
-        default: op
+  colormatch.command.stop:
+    description: "allows player to force stop the arena"
+    default: op
+  colormatch.command.enable:
+    description: "allows player to enable an arena"
+    default: op
+  colormatch.command.disable:
+    description: "allows player to disable an arena"
+    default: op
+  colormatch.command.join:
+    description: "allows player to join to arena"
+    default: true
+  colormatch.command.leave:
+    description: "allows player to leave an arena"
+    default: true
+  colormatch.command.create:
+    description: "allows player to create a new arena"
+    default: op
+  colormatch.command.remove:
+    description: "allows player to remove an arena"
+    default: op
+  colormatch.command.configure:
+    description: "allows player to configure an arena"
+    default: op
+  colormatch.command.help:
+    description: "allows player to see all avalaible ColorMatch commands"
+    default: true
+  colormatch.command.build:
+    description: "allows player to see all avalaible ColorMatch commands"
+    default: op
+  colormatch.command.stats:
+    description: "allows player to see all avalaible ColorMatch commands"
+    default: true
+  colormatch.command.setlobby:
+    description: "allows player to change the default ColorMatch lobby"
+    default: op
+  colormatch.command.list:
+    description: "shows all available arenas"
+    default: op
