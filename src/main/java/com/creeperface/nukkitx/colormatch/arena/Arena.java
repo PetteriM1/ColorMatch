@@ -294,8 +294,10 @@ public class Arena extends ArenaManager implements Listener {
             plugin.getStats().updateStats(p.getName(), false, getRound());
         }
 
-        addSpectator(p);
         checkAlive();
+        if (players.size() > 1) {
+            addSpectator(p);
+        }
     }
 
     public void removeFromArena(Player p) {
