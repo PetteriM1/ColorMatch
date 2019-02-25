@@ -68,7 +68,7 @@ public abstract class ArenaManager extends Configuration {
             case TYPE_FURIOUS:
                 return Effect.getEffect(Effect.SPEED).setAmplifier(9).setDuration(999999999).setVisible(false);
             case TYPE_STONED:
-                return Effect.getEffect(Effect.CONFUSION).setDuration(999999999).setVisible(false);
+                return Effect.getEffect(Effect.NAUSEA).setDuration(999999999).setVisible(false);
         }
 
         return null;

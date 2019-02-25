@@ -9,6 +9,7 @@ import cn.nukkit.inventory.PlayerInventory;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemBlock;
 import cn.nukkit.level.Position;
+import cn.nukkit.level.Sound;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.potion.Effect;
 import cn.nukkit.scheduler.TaskHandler;
@@ -135,8 +136,8 @@ public class Arena extends ArenaManager implements Listener {
         Effect effect = getGameEffect();
 
         Position startPos = getStartPos().add(0.5, 0, 0.5);
+        level.addSound(startPos, Sound.RANDOM_ANVIL_LAND);
         players.values().forEach(p -> {
-            p.teleport(startPos);
             p.sendMessage(plugin.getLanguage().translateString("game.start_game"));
 
             if (effect != null) {
@@ -167,9 +168,7 @@ public class Arena extends ArenaManager implements Listener {
 
         new ArrayList<>(players.values()).forEach(p -> removeFromArena(p, false));
 
-        for (Player p : new ArrayList<>(spectators.values())) {
-            removeSpectator(p);
-        }
+        new ArrayList<>(spectators.values()).forEach(p -> removeSpectator(p));
 
         this.round = -1;
         scheduler.time = 0;
@@ -363,10 +362,14 @@ public class Arena extends ArenaManager implements Listener {
         this.bossBar.removePlayer(p);
         p.teleport(plugin.conf.getMainLobby().getLevel().getSafeSpawn(plugin.conf.getMainLobby()));
 
-        SavedPlayer save = saves.remove(p.getName().toLowerCase());
+        if (plugin.conf.saveInventory) {
+            SavedPlayer save = saves.remove(p.getName().toLowerCase());
 
-        if (save != null) {
-            save.load(p);
+            if (save != null) {
+                save.load(p);
+            }
+        } else {
+            p.setGamemode(plugin.getServer().getDefaultGamemode());
         }
     }
 
