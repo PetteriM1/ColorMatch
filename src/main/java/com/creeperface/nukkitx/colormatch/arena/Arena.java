@@ -318,20 +318,20 @@ public class Arena extends ArenaManager implements Listener {
             }
         }
 
-        p.teleport(plugin.conf.getMainLobby().getLevel().getSafeSpawn(plugin.conf.getMainLobby()));
-
-        p.setGamemode(plugin.getServer().getDefaultGamemode());
-
         resetPlayer(p);
+        p.teleport(plugin.conf.getMainLobby().getLevel().getSafeSpawn(plugin.conf.getMainLobby()));
         this.bossBar.removePlayer(p);
-
         this.bossBar.updateText(plugin.getLanguage().translateString("general.waiting_players", false, this.players.size() + "", plugin.conf.getMaxPlayers() + ""));
         this.bossBar.updateInfo();
 
-        SavedPlayer save = saves.remove(p.getName().toLowerCase());
+        if (plugin.conf.saveInventory) {
+            SavedPlayer save = saves.remove(p.getName().toLowerCase());
 
-        if (save != null) {
-            save.load(p);
+            if (save != null) {
+                save.load(p);
+            }
+        } else {
+            p.setGamemode(plugin.getServer().getDefaultGamemode());
         }
 
         if (phase == PHASE_GAME) {

@@ -48,7 +48,7 @@ public class MainConfiguration extends SimpleConfig {
     @Setter
     @Getter
     @Path("save_inventory")
-    private boolean saveInventory = true;
+    public boolean saveInventory = true;
 
     @Getter
     @Path("language")
@@ -72,9 +72,6 @@ public class MainConfiguration extends SimpleConfig {
 
     public MainConfiguration(ColorMatch plugin) {
         super(plugin);
-        //language = "English";
-        //stats = "none";
-        //saveInventory = true;
     }
 
     public boolean load(boolean isFirst) {

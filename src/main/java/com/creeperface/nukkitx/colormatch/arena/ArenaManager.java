@@ -75,6 +75,8 @@ public abstract class ArenaManager extends Configuration {
     }
 
     public void updateJoinSign() {
+        if (getJoinSign().x == 0 && getJoinSign().y == 0 && getJoinSign().z == 0) return;
+
         BlockEntitySign sign = (BlockEntitySign) getJoinSign().level.getBlockEntity(getJoinSign());
 
         if (sign == null) {
