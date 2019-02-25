@@ -320,6 +320,8 @@ public class Arena extends ArenaManager implements Listener {
 
         p.teleport(plugin.conf.getMainLobby().getLevel().getSafeSpawn(plugin.conf.getMainLobby()));
 
+        p.setGamemode(plugin.getServer().getDefaultGamemode());
+
         resetPlayer(p);
         this.bossBar.removePlayer(p);
 
