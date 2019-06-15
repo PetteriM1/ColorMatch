@@ -23,7 +23,6 @@ public class ArenaBuilder {
         int minY = (int) bb.minY;
         int minZ = (int) bb.minZ - 1;
         int maxX = (int) bb.maxX + 1;
-        int maxY = (int) bb.maxY;
         int maxZ = (int) bb.maxZ + 1;
 
         if (minY < 5) {

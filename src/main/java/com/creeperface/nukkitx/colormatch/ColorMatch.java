@@ -100,7 +100,7 @@ public class ColorMatch extends PluginBase {
     }
 
     public static String getPrefix() {
-        return "§9[§cCM§9] ";
+        return "\u00A79[\u00A7cCM\u00A79] ";
     }
 
     public boolean registerArena(String name, File file) {

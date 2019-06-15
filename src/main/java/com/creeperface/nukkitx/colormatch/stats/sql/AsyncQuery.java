@@ -1,11 +1,8 @@
 package com.creeperface.nukkitx.colormatch.stats.sql;
 
 import cn.nukkit.scheduler.AsyncTask;
-import com.creeperface.nukkitx.colormatch.ColorMatch;
-import com.creeperface.nukkitx.colormatch.stats.SQLStatsProvider;
 import com.creeperface.nukkitx.colormatch.stats.SQLStatsProvider.DbType;
 import lombok.Cleanup;
-import ru.nukkit.dblib.DbLib;
 
 import java.sql.*;
 import java.util.HashMap;

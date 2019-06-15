@@ -60,7 +60,7 @@ public class MainConfiguration extends SimpleConfig {
 
     @Getter
     @Path("reward")
-    private ConfigSection reward = null;
+    private ConfigSection reward;
 
     @Getter
     @Path("chat.game")

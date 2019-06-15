@@ -10,7 +10,7 @@ public class PlayerJoinSpectatorEvent extends PlayerEvent {
     private static final HandlerList handlers = new HandlerList();
 
     @Getter
-    private Arena arena = null;
+    private Arena arena;
 
     public static HandlerList getHandlers() {
         return handlers;

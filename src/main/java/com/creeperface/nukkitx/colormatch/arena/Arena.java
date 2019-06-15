@@ -14,13 +14,11 @@ import cn.nukkit.math.Vector3;
 import cn.nukkit.potion.Effect;
 import cn.nukkit.scheduler.TaskHandler;
 import cn.nukkit.utils.Config;
-import cn.nukkit.utils.DyeColor;
 import cn.nukkit.utils.TextFormat;
 import com.creeperface.nukkitx.colormatch.ColorMatch;
 import com.creeperface.nukkitx.colormatch.event.GameEndEvent;
 import com.creeperface.nukkitx.colormatch.event.PlayerJoinArenaEvent;
 import com.creeperface.nukkitx.colormatch.event.PlayerQuitArenaEvent;
-import com.creeperface.nukkitx.colormatch.utils.BossBar;
 import com.creeperface.nukkitx.colormatch.utils.Reward;
 import com.google.common.collect.Iterables;
 import lombok.Getter;
@@ -69,7 +67,7 @@ public class Arena extends ArenaManager implements Listener {
 
     protected ArrayDeque<WinnerEntry> winners = new ArrayDeque<>();
 
-    protected BossBar bossBar;
+    //protected BossBar bossBar;
 
     protected TaskHandler fastTask;
 
@@ -79,7 +77,7 @@ public class Arena extends ArenaManager implements Listener {
         super.plugin = this;
         this.listener = new ArenaListener(this);
         this.scheduler = new ArenaSchedule(this);
-        this.bossBar = new BossBar(plugin);
+        //this.bossBar = new BossBar(plugin);
         this.plugin = plugin;
     }
 
@@ -93,10 +91,10 @@ public class Arena extends ArenaManager implements Listener {
         scheduler.id = this.plugin.getServer().getScheduler().scheduleRepeatingTask(plugin, scheduler, 20).getTaskId();
         this.enabled = true;
 
-        this.bossBar.setMaxHealth(this.colorChangeInterval * 10);
+        /*this.bossBar.setMaxHealth(this.colorChangeInterval * 10);
         this.bossBar.setHealth(this.colorChangeInterval * 10);
 
-        this.bossBar.updateText(plugin.getLanguage().translateString("waiting_players", false, "0", plugin.conf.getMaxPlayers() + ""));
+        this.bossBar.updateText(plugin.getLanguage().translateString("waiting_players", false, "0", plugin.conf.getMaxPlayers() + ""));*/
 
         updateJoinSign();
         resetFloor();
@@ -152,7 +150,7 @@ public class Arena extends ArenaManager implements Listener {
         scheduler.floor = true;
         scheduler.floorResetedTick = plugin.getServer().getTick();
 
-        this.fastTask = this.plugin.getServer().getScheduler().scheduleRepeatingTask(plugin, new FastTask(this), 2);
+        //this.fastTask = this.plugin.getServer().getScheduler().scheduleRepeatingTask(plugin, new FastTask(this), 2);
 
         startTime = System.currentTimeMillis();
 
@@ -160,7 +158,7 @@ public class Arena extends ArenaManager implements Listener {
         updateJoinSign();
         selectNewColor();
 
-        this.bossBar.updateInfo();
+        //this.bossBar.updateInfo();
     }
 
     public void stop() {
@@ -182,7 +180,7 @@ public class Arena extends ArenaManager implements Listener {
         resetFloor();
         winners.clear();
 
-        this.bossBar.updateText(plugin.getLanguage().translateString("waiting_players", false, "0", plugin.conf.getMaxPlayers() + ""));
+        //this.bossBar.updateText(plugin.getLanguage().translateString("waiting_players", false, "0", plugin.conf.getMaxPlayers() + ""));
     }
 
     public void endGame() {
@@ -266,10 +264,10 @@ public class Arena extends ArenaManager implements Listener {
         save.save(p);
         saves.put(p.getName().toLowerCase(), save);
 
-        this.bossBar.updateText(plugin.getLanguage().translateString("general.waiting_players", false, this.players.size() + "", plugin.conf.getMaxPlayers() + ""));
+        /*this.bossBar.updateText(plugin.getLanguage().translateString("general.waiting_players", false, this.players.size() + "", plugin.conf.getMaxPlayers() + ""));
         this.bossBar.updateInfo();
 
-        this.bossBar.addPlayer(p);
+        this.bossBar.addPlayer(p);*/
 
         p.setGamemode(2);
         p.sendMessage(plugin.getLanguage().translateString("game.join", getName()));
@@ -321,9 +319,9 @@ public class Arena extends ArenaManager implements Listener {
 
         resetPlayer(p);
         p.teleport(plugin.conf.getMainLobby().getLevel().getSafeSpawn(plugin.conf.getMainLobby()));
-        this.bossBar.removePlayer(p);
+        /*this.bossBar.removePlayer(p);
         this.bossBar.updateText(plugin.getLanguage().translateString("general.waiting_players", false, this.players.size() + "", plugin.conf.getMaxPlayers() + ""));
-        this.bossBar.updateInfo();
+        this.bossBar.updateInfo();*/
 
         if (plugin.conf.saveInventory) {
             SavedPlayer save = saves.remove(p.getName().toLowerCase());
@@ -349,8 +347,8 @@ public class Arena extends ArenaManager implements Listener {
         p.teleport(getSpectatorPos().add(0.5, 0, 0.5));
         p.sendMessage(plugin.getLanguage().translateString("game.join_spectator"));
         p.setGamemode(3);
-        bossBar.addPlayer(p);
-        bossBar.updateInfo();
+        //bossBar.addPlayer(p);
+        //bossBar.updateInfo();
         //p.setDisplayName(TextFormat.GRAY + "[" + TextFormat.YELLOW + "SPECTATOR" + TextFormat.GRAY + "] " + TextFormat.WHITE + TextFormat.RESET + " " + p.getDisplayName());
         this.spectators.put(p.getName().toLowerCase(), p);
     }
@@ -359,7 +357,7 @@ public class Arena extends ArenaManager implements Listener {
         //p.setDisplayName(p.getDisplayName().replaceAll(TextFormat.GRAY + "[" + TextFormat.YELLOW + "SPECTATOR" + TextFormat.GRAY + "] " + TextFormat.WHITE + TextFormat.RESET + " ", ""));
         this.spectators.remove(p.getName().toLowerCase());
         resetPlayer(p);
-        this.bossBar.removePlayer(p);
+        //this.bossBar.removePlayer(p);
         p.teleport(plugin.conf.getMainLobby().getLevel().getSafeSpawn(plugin.conf.getMainLobby()));
 
         if (plugin.conf.saveInventory) {
@@ -391,16 +389,11 @@ public class Arena extends ArenaManager implements Listener {
 
             inv.setItemInHand(item.clone());
             inv.sendHeldItem(p);
-
-            /*String msg = WoolColor.getColorName(currentColor) + "\n\n\n\n";
-            p.sendPopup(msg);*/
         });
 
-        TextFormat chatColor = TextFormat.values()[new Random().nextInt(16)];
-
-        this.bossBar.setHealth(colorChangeInterval * 10);
+        /*this.bossBar.setHealth(colorChangeInterval * 10);
         this.bossBar.updateText(chatColor + DyeColor.getByWoolData(currentColor).getName());
-        this.bossBar.updateInfo();
+        this.bossBar.updateInfo();*/
     }
 
     public void resetFloor() {

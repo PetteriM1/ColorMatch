@@ -8,7 +8,7 @@ import com.creeperface.nukkitx.colormatch.ColorMatch;
 
 public class YamlStatsProvider implements StatsProvider {
 
-    private Config cfg = null;
+    private Config cfg;
 
     @Override
     public boolean init(ColorMatch plugin) {

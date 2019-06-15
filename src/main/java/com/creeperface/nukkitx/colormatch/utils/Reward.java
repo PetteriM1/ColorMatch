@@ -13,11 +13,11 @@ public class Reward {
 
     private ColorMatch plugin;
 
-    private double money = 0;
+    private double money;
 
-    private Item[] items = null;
+    private Item[] items;
 
-    private boolean enabled = false;
+    private boolean enabled;
 
     public void init(ColorMatch plugin, ConfigSection section) {
         this.plugin = plugin;

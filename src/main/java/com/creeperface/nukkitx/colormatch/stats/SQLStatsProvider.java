@@ -5,17 +5,15 @@ import cn.nukkit.command.CommandSender;
 import com.creeperface.nukkitx.colormatch.ColorMatch;
 import com.creeperface.nukkitx.colormatch.stats.sql.AsyncQuery;
 import lombok.Cleanup;
-import ru.nukkit.dblib.DbLib;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Map;
 
 public abstract class SQLStatsProvider implements StatsProvider {
 
-    public static final String dbFileName = "stats.db";
+    //public static final String dbFileName = "stats.db";
     protected DbType databaseType;
 
     @Override

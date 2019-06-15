@@ -21,8 +21,8 @@ public class FastTask implements Runnable {
                 int tick = plugin.plugin.getServer().getTick();
                 int begin = scheduler.floorResetedTick;
 
-                this.plugin.bossBar.setHealth(interval - ((tick - begin) / 2));
-                this.plugin.bossBar.updateHealth();
+                //this.plugin.bossBar.setHealth(interval - ((tick - begin) / 2));
+                //this.plugin.bossBar.updateHealth();
 
                 MainLogger.getLogger().debug("progress: " + (interval - (((tick - begin) / 2) * interval)) + "/" + (interval * 10));
             }

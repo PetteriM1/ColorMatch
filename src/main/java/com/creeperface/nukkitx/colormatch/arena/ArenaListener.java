@@ -4,7 +4,6 @@ import cn.nukkit.Player;
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockSignPost;
 import cn.nukkit.blockentity.BlockEntitySign;
-import cn.nukkit.command.CommandSender;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
@@ -19,8 +18,6 @@ import cn.nukkit.event.player.PlayerInteractEvent.Action;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 class ArenaListener implements Listener {
 
@@ -119,7 +116,7 @@ class ArenaListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = false)
+    /*@EventHandler(priority = EventPriority.LOW, ignoreCancelled = false)
     public void onChat(PlayerChatEvent e) {
         Player p = e.getPlayer();
         String msg = e.getMessage();
@@ -142,7 +139,7 @@ class ArenaListener implements Listener {
             if(e.getMessage().lastIndexOf() !p.getDisplayName().toLowerCase().trim().substring(Math.max(0, p.getDisplayName().length() - 5)).contains(TextFormat.WHITE)) {
                 e.setMessage(TextFormat.GRAY + e.getMessage());
             }*/
-        } else if (plugin.isSpectator(p)) {
+        /*} else if (plugin.isSpectator(p)) {
             prefix = plugin.plugin.conf.getSpectatorChatFormat();
         } else {
             for (CommandSender sender : new HashSet<>(recipients)) {
@@ -163,7 +160,7 @@ class ArenaListener implements Listener {
 
         e.setCancelled();
         plugin.messageArenaPlayers(prefix.replaceAll("\\{PLAYER}", p.getDisplayName()).replaceAll("\\{MESSAGE}", e.getMessage()));
-    }
+    }*/
 
     private static ArrayList<DamageCause> allowedCauses = new ArrayList<>(Arrays.asList(DamageCause.VOID, DamageCause.FALL, DamageCause.FIRE, DamageCause.FIRE_TICK, DamageCause.LAVA, DamageCause.CONTACT));
 
@@ -233,21 +230,21 @@ class ArenaListener implements Listener {
     public void onFoodChange(PlayerFoodLevelChangeEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getFoodLevel() >= p.getFoodData().getLevel()) {
-            return;
-        }
-
         if (plugin.inArena(p) || plugin.isSpectator(p)) {
-            e.setCancelled();
+            if (e.getFoodLevel() >= p.getFoodData().getLevel()) {
+                return;
+            }
+
+            e.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent e) {
         Player p = e.getPlayer();
-        String cmd = e.getMessage();
+        String cmd = e.getMessage().toLowerCase().replaceAll("\\s+","");
 
-        if (!p.hasPermission("colormatch.ingamecmd") && !cmd.toLowerCase().startsWith("/cm") && (plugin.inArena(p) || plugin.isSpectator(p))) {
+        if (!p.hasPermission("colormatch.ingamecmd") && !cmd.startsWith("/cm") && (plugin.inArena(p) || plugin.isSpectator(p))) {
             p.sendMessage(plugin.plugin.getLanguage().translateString("game.commands"));
             e.setCancelled();
         }

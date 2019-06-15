@@ -20,9 +20,6 @@ max_players: 12
 #max game tam in seconds
 max_game_time: 600
 
-#every player is immediately teleported to the arena after join. (usefull for servers with bungeecord)
-#direct_join: false
-
 #starting cooldown in seconds
 start_time: 30
 

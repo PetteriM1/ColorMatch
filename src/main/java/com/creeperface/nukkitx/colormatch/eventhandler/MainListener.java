@@ -21,9 +21,7 @@ import com.creeperface.nukkitx.colormatch.ColorMatch;
 import com.creeperface.nukkitx.colormatch.arena.Arena;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainListener implements Listener {
 
@@ -83,7 +81,7 @@ public class MainListener implements Listener {
 
             String line1 = sign.getText()[0];
 
-            if (TextFormat.clean(line1.toLowerCase()).trim().equals("[cm]")) {
+            if (line1 != null && TextFormat.clean(line1.toLowerCase()).trim().equals("[cm]")) {
                 e.setCancelled();
 
                 if (!p.hasPermission("colormatch.sign.use")) {
@@ -374,7 +372,6 @@ public class MainListener implements Listener {
     public void onBlockBreak(BlockBreakEvent e) {
         Player p = e.getPlayer();
         Block b = e.getBlock();
-        Item item = e.getItem();
 
         if (b instanceof BlockSignPost) {
             BlockEntitySign sign = (BlockEntitySign) b.getLevel().getBlockEntity(b);
@@ -389,6 +386,7 @@ public class MainListener implements Listener {
                 if (!p.hasPermission("colormatch.sign.break")) {
                     p.sendMessage(plugin.getLanguage().translateString("general.permission_message"));
                     e.setCancelled();
+                    return;
                 }
             }
         }
@@ -396,6 +394,7 @@ public class MainListener implements Listener {
         Arena arena = plugin.getSetters().get(p.getName());
 
         if (arena != null) {
+            Item item = e.getItem();
             if (item.isTool() && item.getTier() == ItemTool.TIER_GOLD) {
                 e.setCancelled();
 

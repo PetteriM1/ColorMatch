@@ -7,7 +7,7 @@ import cn.nukkit.plugin.Plugin;
 
 public class LeetEconomyProvider implements EconomyProvider {
 
-    private Economy plugin = null;
+    private Economy plugin;
 
     public LeetEconomyProvider(Plugin plugin) {
         if (plugin instanceof Economy) {

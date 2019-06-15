@@ -9,7 +9,6 @@ public class SetupMode {
     @Getter
     private boolean created = false;
 
-    //
     @Getter
     @Setter
     protected boolean joinSign = false;
@@ -50,7 +49,6 @@ public class SetupMode {
     @Getter
     @Setter
     protected boolean level = false;
-    //
 
     Configuration cfg;
 
@@ -58,6 +56,4 @@ public class SetupMode {
         this.cfg = cfg;
         this.created = created;
     }
-
-
 }

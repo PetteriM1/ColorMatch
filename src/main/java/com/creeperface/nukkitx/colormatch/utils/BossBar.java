@@ -92,7 +92,6 @@ public class BossBar {
             pk2.type = 2;
             p.dataPacket(pk2);
         }
-
     }
 
     public void removePlayer(String name) {

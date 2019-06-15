@@ -7,7 +7,7 @@ import me.onebone.economyapi.EconomyAPI;
 
 public class EconomyAPIProvider implements EconomyProvider {
 
-    private EconomyAPI plugin = null;
+    private EconomyAPI plugin;
 
     public EconomyAPIProvider(Plugin plugin) {
         if (plugin instanceof EconomyAPI) {
