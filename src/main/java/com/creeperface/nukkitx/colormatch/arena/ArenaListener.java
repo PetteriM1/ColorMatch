@@ -244,9 +244,9 @@ class ArenaListener implements Listener {
         Player p = e.getPlayer();
         String cmd = e.getMessage().toLowerCase().replaceAll("\\s+","");
 
-        if (!p.hasPermission("colormatch.ingamecmd") && !cmd.startsWith("/cm") && (plugin.inArena(p) || plugin.isSpectator(p))) {
+        if (!p.hasPermission("colormatch.ingamecmd") && !cmd.startsWith("/cm") && !cmd.startsWith("/hub") && (plugin.inArena(p) || plugin.isSpectator(p))) {
             p.sendMessage(plugin.plugin.getLanguage().translateString("game.commands"));
-            e.setCancelled();
+            e.setCancelled(true);
         }
     }
 
