@@ -337,7 +337,7 @@ public class MainListener implements Listener {
                         arena.setup = false;
                         p.sendMessage(plugin.getLanguage().translateString("setupmode.save", arena.getName()));
                         p.getInventory().clearAll();
-                        if (p.isSurvival()) {
+                        if (p.isSurvival() || p.isAdventure()) {
                             p.getAdventureSettings().set(AdventureSettings.Type.ALLOW_FLIGHT, false);
                         }
                         plugin.getSetters().remove(p.getName());
