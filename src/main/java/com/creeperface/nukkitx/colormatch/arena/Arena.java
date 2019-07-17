@@ -38,7 +38,7 @@ public class Arena extends ArenaManager implements Listener {
     @Getter
     protected boolean enabled = false;
 
-    public boolean setup = false;
+    public boolean setup;
 
     @Getter
     protected Map<String, Player> players = new HashMap<>();

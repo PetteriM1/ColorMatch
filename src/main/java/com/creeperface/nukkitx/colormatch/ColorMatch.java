@@ -118,12 +118,7 @@ public class ColorMatch extends PluginBase {
             return;
         }
 
-        File[] files = arenas.listFiles(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.lastIndexOf('.') > 0 && name.substring(name.lastIndexOf('.')).equals(".yml");
-            }
-        });
+        File[] files = arenas.listFiles((dir, name) -> name.lastIndexOf('.') > 0 && name.substring(name.lastIndexOf('.')).equals(".yml"));
 
         if (files == null || files.length == 0) {
             getServer().getLogger().info(getLanguage().translateString("general.no_arenas"));
@@ -136,9 +131,7 @@ public class ColorMatch extends PluginBase {
 
             if (registerArena(name, file)) {
                 getServer().getLogger().info(getLanguage().translateString("general.load_arena", name));
-            } /*else {
-                this.getLogger().info(TextFormat.GRAY + file.getName()+TextFormat.RED+" load failed");
-            }*/
+            }
         }
     }
 

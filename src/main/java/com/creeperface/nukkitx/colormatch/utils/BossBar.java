@@ -47,7 +47,7 @@ public class BossBar {
         permanentPacketUpdate.overlay = 0x4286f4;
 
         this.attributesPacket.entityId = this.id;
-        this.attributesPacket.entries = new Attribute[]{Attribute.getAttribute(4).setMaxValue((float) this.maxHealth).setValue((float) this.getHealth())};
+        this.attributesPacket.entries = new Attribute[]{Attribute.getAttribute(4).setMaxValue(this.maxHealth).setValue(this.getHealth())};
         this.attributesPacket.encode();
         this.attributesPacket.isEncoded = true;
 
@@ -74,7 +74,7 @@ public class BossBar {
 
         UpdateAttributesPacket pk1 = new UpdateAttributesPacket();
         pk1.entityId = this.id;
-        pk1.entries = new Attribute[]{Attribute.getAttribute(Attribute.MAX_HEALTH).setMaxValue((float) this.maxHealth).setValue((float) this.getHealth())};
+        pk1.entries = new Attribute[]{Attribute.getAttribute(Attribute.MAX_HEALTH).setMaxValue(this.maxHealth).setValue(this.getHealth())};
         p.dataPacket(pk);
         p.dataPacket(pk1);
         p.dataPacket(this.attributesPacket);
@@ -110,12 +110,12 @@ public class BossBar {
         Location pos = p.add(this.getDirectionVector(p).normalize().multiply(-15));
         MoveEntityAbsolutePacket pk2 = new MoveEntityAbsolutePacket();
         pk2.eid = this.id;
-        pk2.x = (double) ((float) pos.x);
-        pk2.y = (double) ((float) (pos.y - 30));
-        pk2.z = (double) ((float) pos.z);
-        pk2.yaw = (double) ((float) p.yaw);
-        pk2.headYaw = (double) ((float) p.yaw);
-        pk2.pitch = (double) ((float) p.pitch);
+        pk2.x = ((float) pos.x);
+        pk2.y = ((float) (pos.y - 30));
+        pk2.z = ((float) pos.z);
+        pk2.yaw = ((float) p.yaw);
+        pk2.headYaw = ((float) p.yaw);
+        pk2.pitch = ((float) p.pitch);
         p.dataPacket(pk2);
         p.dataPacket(this.permanentPacket);
         p.dataPacket(this.attributesPacket);
@@ -138,7 +138,7 @@ public class BossBar {
         pk.eid = this.id;
         pk.metadata = this.metadata;
 
-        this.attributesPacket.entries[0].setMaxValue((float) this.maxHealth).setValue((float) this.getHealth());
+        this.attributesPacket.entries[0].setMaxValue(this.maxHealth).setValue(this.getHealth());
         this.attributesPacket.encode();
         this.attributesPacket.isEncoded = true;
 
@@ -146,7 +146,7 @@ public class BossBar {
     }
 
     public void updateHealth() {
-        this.attributesPacket.entries[0].setMaxValue((float) this.maxHealth).setValue((float) this.getHealth());
+        this.attributesPacket.entries[0].setMaxValue(this.maxHealth).setValue(this.getHealth());
         this.attributesPacket.encode();
         this.attributesPacket.isEncoded = true;
 
@@ -155,7 +155,7 @@ public class BossBar {
 
     public Vector3 getDirectionVector(Player p) {
         double pitch = 1.5707963267948966D;
-        double yaw = (p.getYaw() + (double) this.random.nextRange(-10, 10) + 90) * 3.141592653589793D / 180.0D;
+        double yaw = (p.getYaw() + this.random.nextRange(-10, 10) + 90) * 3.141592653589793D / 180.0D;
         double x = Math.sin(pitch) * Math.cos(yaw);
         double z = Math.sin(pitch) * Math.sin(yaw);
         double y = Math.cos(pitch);

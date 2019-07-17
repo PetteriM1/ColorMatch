@@ -64,7 +64,7 @@ public class YamlStatsProvider implements StatsProvider {
         receiver.sendMessage(msg);
     }
 
-    private class SaveTask implements Runnable {
+    private static class SaveTask implements Runnable {
 
         YamlStatsProvider plugin;
 

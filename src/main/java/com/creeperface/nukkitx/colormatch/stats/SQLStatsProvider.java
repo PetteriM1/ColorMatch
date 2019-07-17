@@ -63,7 +63,7 @@ public abstract class SQLStatsProvider implements StatsProvider {
         return null;
     }
 
-    private class UpdateStatsTask extends AsyncQuery {
+    private static class UpdateStatsTask extends AsyncQuery {
 
         private final int deaths;
         private final int wins;
@@ -98,7 +98,7 @@ public abstract class SQLStatsProvider implements StatsProvider {
         }
     }
 
-    private class RegisterQuery extends AsyncQuery {
+    private static class RegisterQuery extends AsyncQuery {
 
         String name;
 
@@ -124,7 +124,7 @@ public abstract class SQLStatsProvider implements StatsProvider {
         }
     }
 
-    private class GetStatsQuery extends AsyncQuery {
+    private static class GetStatsQuery extends AsyncQuery {
 
         private CommandSender receiver;
 
@@ -133,7 +133,7 @@ public abstract class SQLStatsProvider implements StatsProvider {
             this.receiver = receiver;
         }
 
-        Map<String, Object> data = null;
+        Map<String, Object> data;
 
         @Override
         public void onQuery(Map<String, Object> data) {

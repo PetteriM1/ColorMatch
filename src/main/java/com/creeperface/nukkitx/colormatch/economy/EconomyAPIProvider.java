@@ -13,9 +13,8 @@ public class EconomyAPIProvider implements EconomyProvider {
         if (plugin instanceof EconomyAPI) {
             this.plugin = (EconomyAPI) plugin;
         } else {
-            Server.getInstance().getLogger().warning("Could not register plugin economy");
+            Server.getInstance().getLogger().warning("Could not register plugin EconomyAPI");
         }
-
     }
 
     @Override

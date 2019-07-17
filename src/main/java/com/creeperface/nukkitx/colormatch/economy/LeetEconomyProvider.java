@@ -13,9 +13,8 @@ public class LeetEconomyProvider implements EconomyProvider {
         if (plugin instanceof Economy) {
             this.plugin = (Economy) plugin;
         } else {
-            Server.getInstance().getLogger().warning("Could not register plugin economy");
+            Server.getInstance().getLogger().warning("Could not register plugin LeetEconomy");
         }
-
     }
 
     @Override
