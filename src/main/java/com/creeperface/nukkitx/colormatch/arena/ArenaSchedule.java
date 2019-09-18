@@ -1,6 +1,7 @@
 package com.creeperface.nukkitx.colormatch.arena;
 
 import cn.nukkit.Player;
+import cn.nukkit.entity.Attribute;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -63,9 +64,13 @@ class ArenaSchedule implements Runnable {
                 plugin.resetFloor();
                 floorResetedTick = plugin.plugin.getServer().getTick();
             }
+
+            plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE_LEVEL).setValue(0)));
+        } else {
+            plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE_LEVEL).setValue(interval - colorTime)));
         }
 
-//        if(floor) {
+//        if (floor) {
 //            update = true;
 //            this.plugin.bossBar.setHealth((interval - 1) - (colorTime % (interval - 1)));
 //        }
