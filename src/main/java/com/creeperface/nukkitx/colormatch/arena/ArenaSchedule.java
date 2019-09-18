@@ -65,9 +65,11 @@ class ArenaSchedule implements Runnable {
                 floorResetedTick = plugin.plugin.getServer().getTick();
             }
 
+            plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE).setValue(0)));
             plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE_LEVEL).setValue(0)));
-        } else {
-            plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE_LEVEL).setValue(interval - colorTime)));
+        } else if (floor) {
+            plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE).setValue((float) (interval - (colorTime % interval)) / interval)));
+            plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE_LEVEL).setValue(interval - (colorTime % interval))));
         }
 
 //        if (floor) {
