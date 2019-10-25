@@ -25,7 +25,6 @@ import com.creeperface.nukkitx.colormatch.utils.Utils;
 import lombok.Getter;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

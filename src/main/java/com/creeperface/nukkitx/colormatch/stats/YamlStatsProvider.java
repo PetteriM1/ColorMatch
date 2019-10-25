@@ -13,7 +13,7 @@ public class YamlStatsProvider implements StatsProvider {
     @Override
     public boolean init(ColorMatch plugin) {
         cfg = new Config(plugin.getDataFolder() + "/stats.yml", Config.YAML);
-        Server.getInstance().getScheduler().scheduleDelayedRepeatingTask(plugin, new SaveTask(this), 300 * 20, 300 * 20);
+        Server.getInstance().getScheduler().scheduleDelayedRepeatingTask(plugin, new SaveTask(this), 6000, 6000);
         return true;
     }
 

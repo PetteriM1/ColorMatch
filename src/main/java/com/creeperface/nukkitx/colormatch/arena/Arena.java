@@ -302,6 +302,10 @@ public class Arena extends ArenaManager implements Listener {
     }
 
     public void removeFromArena(Player p, boolean message) {
+        removeFromArena(p, message, true);
+    }
+
+    public void removeFromArena(Player p, boolean message, boolean tp) {
         this.players.remove(p.getName().toLowerCase());
 
         PlayerQuitArenaEvent ev = new PlayerQuitArenaEvent(p, this);
@@ -318,7 +322,9 @@ public class Arena extends ArenaManager implements Listener {
         }
 
         resetPlayer(p);
-        p.teleport(plugin.conf.getMainLobby().getLevel().getSafeSpawn(plugin.conf.getMainLobby()));
+        if (tp) {
+            p.teleport(plugin.conf.getMainLobby().getLevel().getSafeSpawn(plugin.conf.getMainLobby()));
+        }
         /*this.bossBar.removePlayer(p);
         this.bossBar.updateText(plugin.getLanguage().translateString("general.waiting_players", false, this.players.size() + "", plugin.conf.getMaxPlayers() + ""));
         this.bossBar.updateInfo();*/
