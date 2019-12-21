@@ -87,7 +87,7 @@ public abstract class ArenaManager extends Configuration {
             sign = new BlockEntitySign(getJoinSign().level.getChunk((int) getJoinSign().x >> 4, (int) getJoinSign().z >> 4, true), nbt);
         }
 
-        sign.setText(TextFormat.GRAY + "[" + TextFormat.DARK_AQUA + plugin.name + TextFormat.GRAY + "]", "" + TextFormat.GRAY + plugin.players.size() + "/" + plugin.plugin.conf.getMaxPlayers(), TextFormat.BLUE + getTypeString(getType()), plugin.enabled ? plugin.phase == Arena.PHASE_GAME ? TextFormat.RED + "running" : TextFormat.GREEN + "lobby" : TextFormat.RED + "disabled");
+        sign.setText(TextFormat.GRAY + "[" + TextFormat.DARK_AQUA + plugin.name + TextFormat.GRAY + ']', "" + TextFormat.GRAY + plugin.players.size() + '/' + plugin.plugin.conf.getMaxPlayers(), TextFormat.BLUE + getTypeString(getType()), plugin.enabled ? plugin.phase == Arena.PHASE_GAME ? TextFormat.RED + "running" : TextFormat.GREEN + "lobby" : TextFormat.RED + "disabled");
     }
 
     public void checkAlive() {
@@ -106,7 +106,7 @@ public abstract class ArenaManager extends Configuration {
             return -1;
         }
 
-        int edgeCount = getRadius() * 2 + 1;
+        int edgeCount = (getRadius() << 1) + 1;
 
         pos = pos.subtract(floor.minX, 0, floor.minZ);
 

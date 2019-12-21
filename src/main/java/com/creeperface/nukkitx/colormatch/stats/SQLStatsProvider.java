@@ -150,9 +150,9 @@ public abstract class SQLStatsProvider implements StatsProvider {
             ColorMatch plugin = ColorMatch.getInstance();
 
             String msg = plugin.getLanguage().translateString("commands.success.stats", player);
-            msg += "\n" + plugin.getLanguage().translateString("stats.wins", String.valueOf(data.get("wins")));
-            msg += "\n" + plugin.getLanguage().translateString("stats.deaths", String.valueOf(data.get("deaths")));
-            msg += "\n" + plugin.getLanguage().translateString("stats.rounds", String.valueOf(data.get("rounds")));
+            msg += '\n' + plugin.getLanguage().translateString("stats.wins", String.valueOf(data.get("wins")));
+            msg += '\n' + plugin.getLanguage().translateString("stats.deaths", String.valueOf(data.get("deaths")));
+            msg += '\n' + plugin.getLanguage().translateString("stats.rounds", String.valueOf(data.get("rounds")));
 
             receiver.sendMessage(msg);
         }

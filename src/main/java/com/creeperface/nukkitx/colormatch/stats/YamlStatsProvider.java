@@ -57,9 +57,9 @@ public class YamlStatsProvider implements StatsProvider {
         }
 
         String msg = plugin.getLanguage().translateString("commands.success.stats", p);
-        msg += "\n" + plugin.getLanguage().translateString("stats.wins", data.getString("wins"));
-        msg += "\n" + plugin.getLanguage().translateString("stats.deaths", data.getString("deaths"));
-        msg += "\n" + plugin.getLanguage().translateString("stats.rounds", data.getString("rounds"));
+        msg += '\n' + plugin.getLanguage().translateString("stats.wins", data.getString("wins"));
+        msg += '\n' + plugin.getLanguage().translateString("stats.deaths", data.getString("deaths"));
+        msg += '\n' + plugin.getLanguage().translateString("stats.rounds", data.getString("rounds"));
 
         receiver.sendMessage(msg);
     }

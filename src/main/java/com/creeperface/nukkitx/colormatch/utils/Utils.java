@@ -37,12 +37,12 @@ public class Utils {
             lvl = ((Position) v).getLevel();
         }
 
-        cfg.set(index + "." + "x", v.x);
-        cfg.set(index + "." + "y", v.y);
-        cfg.set(index + "." + "z", v.z);
+        cfg.set(index + '.' + 'x', v.x);
+        cfg.set(index + '.' + 'y', v.y);
+        cfg.set(index + '.' + 'z', v.z);
 
         if (lvl != null) {
-            cfg.set(index + "." + "world", lvl.getFolderName());
+            cfg.set(index + '.' + "world", lvl.getFolderName());
         }
     }
 

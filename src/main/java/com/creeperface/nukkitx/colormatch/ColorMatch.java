@@ -86,10 +86,10 @@ public class ColorMatch extends PluginBase {
     }
 
     public void onDisable() {
-        getServer().getLogger().debug(getLanguage().translateString("general.disable_all"));
+        //getServer().getLogger().debug(getLanguage().translateString("general.disable_all"));
 
         arenas.forEach((name, arena) -> {
-            getServer().getLogger().debug(getLanguage().translateString("general.disable_arena", name));
+            //getServer().getLogger().debug(getLanguage().translateString("general.disable_arena", name));
             arena.disable();
             arena.save(false);
         });
@@ -479,28 +479,28 @@ public class ColorMatch extends PluginBase {
         String arena = getLanguage().translateString("custom_words.arena", false);
 
         if (sender.hasPermission("colormatch.command.start"))
-            help += "\n" + TextFormat.YELLOW + "/cm start [" + arena + "]";
+            help += "\n" + TextFormat.YELLOW + "/cm start [" + arena + ']';
         if (sender.hasPermission("colormatch.command.stop"))
-            help += "\n" + TextFormat.YELLOW + "/cm stop [" + arena + "]";
+            help += "\n" + TextFormat.YELLOW + "/cm stop [" + arena + ']';
         if (sender.hasPermission("colormatch.command.join"))
-            help += "\n" + TextFormat.YELLOW + "/cm join <" + arena + ">";
+            help += "\n" + TextFormat.YELLOW + "/cm join <" + arena + '>';
         if (sender.hasPermission("colormatch.command.leave")) help += "\n" + TextFormat.YELLOW + "/cm leave";
         if (sender.hasPermission("colormatch.command.enable"))
-            help += "\n" + TextFormat.YELLOW + "/cm enable <" + arena + ">";
+            help += "\n" + TextFormat.YELLOW + "/cm enable <" + arena + '>';
         if (sender.hasPermission("colormatch.command.disable"))
-            help += "\n" + TextFormat.YELLOW + "/cm disable <" + arena + ">";
+            help += "\n" + TextFormat.YELLOW + "/cm disable <" + arena + '>';
         if (sender.hasPermission("colormatch.command.configure"))
-            help += "\n" + TextFormat.YELLOW + "/cm configure <" + arena + ">";
+            help += "\n" + TextFormat.YELLOW + "/cm configure <" + arena + '>';
         if (sender.hasPermission("colormatch.command.create"))
-            help += "\n" + TextFormat.YELLOW + "/cm create <" + arena + ">";
+            help += "\n" + TextFormat.YELLOW + "/cm create <" + arena + '>';
         if (sender.hasPermission("colormatch.command.list"))
-            help += "\n" + TextFormat.YELLOW + "/cm list [" + getLanguage().translateString("custom_words.world", false) + "]";
+            help += "\n" + TextFormat.YELLOW + "/cm list [" + getLanguage().translateString("custom_words.world", false) + ']';
         if (sender.hasPermission("colormatch.command.remove"))
-            help += "\n" + TextFormat.YELLOW + "/cm remove <" + arena + ">";
+            help += "\n" + TextFormat.YELLOW + "/cm remove <" + arena + '>';
         if (sender.hasPermission("colormatch.command.build"))
-            help += "\n" + TextFormat.YELLOW + "/cm build <" + arena + ">";
+            help += "\n" + TextFormat.YELLOW + "/cm build <" + arena + '>';
         if (sender.hasPermission("colormatch.command.stats"))
-            help += "\n" + TextFormat.YELLOW + "/cm stats [" + getLanguage().translateString("custom_words.player", false) + "]";
+            help += "\n" + TextFormat.YELLOW + "/cm stats [" + getLanguage().translateString("custom_words.player", false) + ']';
         if (sender.hasPermission("colormatch.command.help")) help += "\n" + TextFormat.YELLOW + "/cm help";
 
         return help;

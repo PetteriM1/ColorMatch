@@ -209,7 +209,7 @@ public class Arena extends ArenaManager implements Listener {
                 WinnerEntry winner = winners.removeLast();
 
                 long timeDiff = (winner.time - startTime) / 1000;
-                replace = winner.player.getDisplayName() + TextFormat.GRAY + "(" + String.format("%02d:%02d", timeDiff / 60, (timeDiff % 60)) + ")";
+                replace = winner.player.getDisplayName() + TextFormat.GRAY + '(' + String.format("%02d:%02d", timeDiff / 60, (timeDiff % 60)) + ')';
             }
 
             message = message.replaceAll("%" + i, replace);
@@ -294,6 +294,8 @@ public class Arena extends ArenaManager implements Listener {
         checkAlive();
         if (players.size() > 1) {
             addSpectator(p);
+        } else {
+            p.teleport(plugin.conf.getMainLobby());
         }
     }
 

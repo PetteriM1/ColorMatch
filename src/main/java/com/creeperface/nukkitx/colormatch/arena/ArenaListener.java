@@ -162,9 +162,9 @@ class ArenaListener implements Listener {
         plugin.messageArenaPlayers(prefix.replaceAll("\\{PLAYER}", p.getDisplayName()).replaceAll("\\{MESSAGE}", e.getMessage()));
     }*/
 
-    private static ArrayList<DamageCause> allowedCauses = new ArrayList<>(Arrays.asList(DamageCause.VOID, DamageCause.FALL, DamageCause.FIRE, DamageCause.FIRE_TICK, DamageCause.LAVA, DamageCause.CONTACT));
+    private static final ArrayList<DamageCause> allowedCauses = new ArrayList<>(Arrays.asList(DamageCause.VOID, DamageCause.FALL, DamageCause.FIRE, DamageCause.FIRE_TICK, DamageCause.LAVA, DamageCause.CONTACT));
 
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.LOW)
     public void onDamage(EntityDamageEvent e) {
         if (e.isCancelled()) {
             return;
@@ -177,10 +177,10 @@ class ArenaListener implements Listener {
         if (entity instanceof Player) {
             p = (Player) entity;
 
-            if (plugin.isSpectator(p)) {
+            /*if (plugin.isSpectator(p)) {
                 e.setCancelled();
                 return;
-            }
+            }*/
 
             if (plugin.inArena(p)) {
                 if (plugin.phase == Arena.PHASE_LOBBY) {
