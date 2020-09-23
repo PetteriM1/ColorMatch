@@ -32,7 +32,8 @@ public class YamlStatsProvider implements StatsProvider {
 
     @Override
     public boolean createNewUser(String name) {
-        if (cfg.exists(name.toLowerCase())) {
+        name = name.toLowerCase();
+        if (cfg.exists(name)) {
             return false;
         }
 
@@ -41,7 +42,7 @@ public class YamlStatsProvider implements StatsProvider {
         data.set("deaths", 0);
         data.set("rounds", 0);
 
-        cfg.set(name.toLowerCase(), data);
+        cfg.set(name, data);
         return true;
     }
 

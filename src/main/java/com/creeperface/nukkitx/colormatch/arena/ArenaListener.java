@@ -87,7 +87,7 @@ class ArenaListener implements Listener {
                 return;
             }
 
-            String line1 = sign.getText()[0];
+            //String line1 = sign.getText()[0];
 
             if (b.equals(plugin.getJoinSign())) {
                 if (!p.hasPermission("colormatch.sign.break")) {

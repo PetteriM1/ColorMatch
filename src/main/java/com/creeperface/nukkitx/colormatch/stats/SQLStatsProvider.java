@@ -37,6 +37,7 @@ public abstract class SQLStatsProvider implements StatsProvider {
 
     @Override
     public boolean createNewUser(String name) {
+        name = name.toLowerCase();
         RegisterQuery query = new RegisterQuery(name);
         Server.getInstance().getScheduler().scheduleAsyncTask(ColorMatch.getInstance(), query);
         return true;

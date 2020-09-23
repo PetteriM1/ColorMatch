@@ -37,7 +37,7 @@ public class MainListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
 
-        plugin.getStats().createNewUser(p.getName().toLowerCase());
+        plugin.getStats().createNewUser(p.getName());
 
         if (plugin.getSetters().containsKey(p.getName())) {
             p.sendMessage(plugin.getLanguage().translateString("setupmode.continue_join", plugin.getSetters().get(p.getName()).getName()));

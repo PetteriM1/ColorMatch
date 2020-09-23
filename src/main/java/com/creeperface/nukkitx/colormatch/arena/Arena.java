@@ -15,6 +15,7 @@ import cn.nukkit.potion.Effect;
 import cn.nukkit.scheduler.TaskHandler;
 import cn.nukkit.utils.Config;
 import cn.nukkit.utils.TextFormat;
+import cn.nukkit.utils.Utils;
 import com.creeperface.nukkitx.colormatch.ColorMatch;
 import com.creeperface.nukkitx.colormatch.event.GameEndEvent;
 import com.creeperface.nukkitx.colormatch.event.PlayerJoinArenaEvent;
@@ -380,7 +381,7 @@ public class Arena extends ArenaManager implements Listener {
     }
 
     public void selectNewColor() {
-        this.currentColor = new Random().nextInt(15);
+        this.currentColor = Utils.random.nextInt(15);
 
         Item item = new ItemBlock(getFloorMaterial(), currentColor);
         item.setDamage(currentColor);
@@ -405,7 +406,7 @@ public class Arena extends ArenaManager implements Listener {
     }
 
     public void resetFloor() {
-        Random random = new Random();
+        SplittableRandom random = Utils.random;
         Block block = getFloorMaterial();
         Vector3 v = new Vector3();
 
