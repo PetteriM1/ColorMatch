@@ -326,7 +326,7 @@ public class Arena extends ArenaManager implements Listener {
 
         resetPlayer(p);
         if (tp) {
-            p.teleport(plugin.conf.getMainLobby().getLevel().getSafeSpawn(plugin.conf.getMainLobby()));
+            p.teleport(plugin.conf.getMainLobby());
         }
         /*this.bossBar.removePlayer(p);
         this.bossBar.updateText(plugin.getLanguage().translateString("general.waiting_players", false, this.players.size() + "", plugin.conf.getMaxPlayers() + ""));
@@ -367,7 +367,7 @@ public class Arena extends ArenaManager implements Listener {
         this.spectators.remove(p.getName().toLowerCase());
         resetPlayer(p);
         //this.bossBar.removePlayer(p);
-        p.teleport(plugin.conf.getMainLobby().getLevel().getSafeSpawn(plugin.conf.getMainLobby()));
+        p.teleport(plugin.conf.getMainLobby());
 
         if (plugin.conf.saveInventory) {
             SavedPlayer save = saves.remove(p.getName().toLowerCase());

@@ -51,12 +51,13 @@ class ArenaListener implements Listener {
         }
 
         Player p = e.getPlayer();
-        Block b = e.getBlock();
 
         if (plugin.inArena(p)) {
             e.setCancelled();
             return;
         }
+
+        Block b = e.getBlock();
 
         if (b instanceof BlockSignPost && b.equals(plugin.getJoinSign())) {
             e.setCancelled();

@@ -31,7 +31,7 @@ public class MainListener implements Listener {
         this.plugin = plugin;
     }
 
-    private List<String> acceptQueue = new ArrayList<>();
+    private final List<String> acceptQueue = new ArrayList<>();
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -444,6 +444,8 @@ public class MainListener implements Listener {
 
     @EventHandler
     public void onSignChange(SignChangeEvent e) {
+        if (!plugin.conf.joinSignsEnabled) return;
+
         Player p = e.getPlayer();
         String line1 = e.getLine(0);
 

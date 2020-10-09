@@ -50,3 +50,6 @@ reward:
 #    enchants:
 #    - id: 0
 #      level: 4
+
+#join signs enabled
+join_signs: true

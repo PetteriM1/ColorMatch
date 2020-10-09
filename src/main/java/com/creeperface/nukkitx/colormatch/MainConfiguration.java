@@ -70,6 +70,11 @@ public class MainConfiguration extends SimpleConfig {
     @Path("chat.spectator")
     private String spectatorChatFormat = "&7[&eSPECTATE&7]&e&r {PLAYER} &3>&7 {MESSAGE}";
 
+    @Setter
+    @Getter
+    @Path("join_signs")
+    public boolean joinSignsEnabled = true;
+
     public MainConfiguration(ColorMatch plugin) {
         super(plugin);
     }
