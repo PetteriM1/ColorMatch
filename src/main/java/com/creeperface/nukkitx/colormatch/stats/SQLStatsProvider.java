@@ -127,7 +127,7 @@ public abstract class SQLStatsProvider implements StatsProvider {
 
     private static class GetStatsQuery extends AsyncQuery {
 
-        private CommandSender receiver;
+        private final CommandSender receiver;
 
         GetStatsQuery(String name, CommandSender receiver) {
             player = name;

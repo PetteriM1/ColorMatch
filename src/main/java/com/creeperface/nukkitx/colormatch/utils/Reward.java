@@ -50,7 +50,7 @@ public class Reward {
             itemList.add(Item.get(id, damage));
         }
 
-        this.items = itemList.stream().toArray(Item[]::new);
+        this.items = itemList.toArray(new Item[0]);
     }
 
     public void give(Player... players) {

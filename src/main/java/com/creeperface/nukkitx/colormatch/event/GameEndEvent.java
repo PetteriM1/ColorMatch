@@ -18,16 +18,16 @@ public class GameEndEvent extends Event {
     }
 
     @Getter
-    private Arena arena;
+    private final Arena arena;
 
     @Getter
-    private Reward reward;
+    private final Reward reward;
 
     @Getter
-    private Player winner;
+    private final Player winner;
 
     @Getter
-    private ArrayDeque<Arena.WinnerEntry> players;
+    private final ArrayDeque<Arena.WinnerEntry> players;
 
     public GameEndEvent(ArrayDeque<Arena.WinnerEntry> winners, Arena a, Reward reward) {
         this.winner = winners.getLast().player;

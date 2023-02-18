@@ -100,7 +100,7 @@ public abstract class ArenaManager extends Configuration {
         AxisAlignedBB floor = getFloor();
 
         pos = pos.clone();
-        pos.y = floor.maxY;
+        pos.y = floor.getMaxY();
 
         if (!floor.isVectorInside(pos)) {
             return -1;
@@ -108,7 +108,7 @@ public abstract class ArenaManager extends Configuration {
 
         int edgeCount = (getRadius() << 1) + 1;
 
-        pos = pos.subtract(floor.minX, 0, floor.minZ);
+        pos = pos.subtract(floor.getMinX(), 0, floor.getMinZ());
 
         int indexX = pos.getFloorX() / edgeCount;
         int indexZ = pos.getFloorZ() / edgeCount;

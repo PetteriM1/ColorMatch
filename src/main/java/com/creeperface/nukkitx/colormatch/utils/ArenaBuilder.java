@@ -19,11 +19,11 @@ public class ArenaBuilder {
 
         AxisAlignedBB bb = cfg.getFloor();
 
-        int minX = (int) bb.minX - 1;
-        int minY = (int) bb.minY;
-        int minZ = (int) bb.minZ - 1;
-        int maxX = (int) bb.maxX + 1;
-        int maxZ = (int) bb.maxZ + 1;
+        int minX = (int) bb.getMinX() - 1;
+        int minY = (int) bb.getMinY();
+        int minZ = (int) bb.getMinZ() - 1;
+        int maxX = (int) bb.getMaxX() + 1;
+        int maxZ = (int) bb.getMaxZ() + 1;
 
         if (minY < 5) {
             return ColorMatch.getInstance().getLanguage().translateString("arena_builder.failure");
@@ -49,7 +49,7 @@ public class ArenaBuilder {
         Vector3 v = new Vector3();
         int blocks = 0;
 
-        /**
+        /*
          * clear area
          */
 
@@ -63,7 +63,7 @@ public class ArenaBuilder {
             }
         }
 
-        /**
+        /*
          * generate wall
          */
 
@@ -81,7 +81,7 @@ public class ArenaBuilder {
             }
         }
 
-        /**
+        /*
          * generate spectator floor, floor, lava and roof
          */
 

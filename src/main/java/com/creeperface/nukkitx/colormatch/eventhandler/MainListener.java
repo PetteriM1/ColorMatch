@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MainListener implements Listener {
 
-    private ColorMatch plugin;
+    private final ColorMatch plugin;
 
     public MainListener(ColorMatch plugin) {
         this.plugin = plugin;
@@ -176,7 +176,7 @@ public class MainListener implements Listener {
                     int radius;
 
                     try {
-                        radius = Integer.valueOf(args[1]);
+                        radius = Integer.parseInt(args[1]);
                     } catch (NumberFormatException nfe) {
                         p.sendMessage(plugin.getLanguage().translateString("setupmode.failure.number_error"));
                         break;
@@ -212,7 +212,7 @@ public class MainListener implements Listener {
                     int interval;
 
                     try {
-                        interval = Integer.valueOf(args[1]);
+                        interval = Integer.parseInt(args[1]);
                     } catch (NumberFormatException nfe) {
                         p.sendMessage(plugin.getLanguage().translateString("setupmode.failure.number_error"));
                         break;

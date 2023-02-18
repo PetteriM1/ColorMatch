@@ -3,12 +3,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>ColorMatch</groupId>
     <artifactId>ColorMatch</artifactId>
     <version>PM1E</version>
     <build>
-        <defaultGoal>install</defaultGoal>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <finalName>ColorMatch</finalName>
         <plugins>
@@ -33,7 +31,7 @@
             </resource>
             <resource>
                 <targetPath>.</targetPath>
-                <filtering>true</filtering>
+                <filtering>false</filtering>
                 <directory>${basedir}/src/main/resources/</directory>
                 <includes>
                     <include>config.yml</include>
@@ -60,7 +58,7 @@
         <dependency>
     		<groupId>org.projectlombok</groupId>
     		<artifactId>lombok</artifactId>
-    		<version>1.16.16</version>
+    		<version>1.18.4</version>
     		<scope>provided</scope>
 	    </dependency>
         <dependency>

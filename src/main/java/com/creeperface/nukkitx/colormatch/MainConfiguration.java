@@ -52,11 +52,11 @@ public class MainConfiguration extends SimpleConfig {
 
     @Getter
     @Path("language")
-    private String language = "english";
+    private final String language = "english";
 
     @Getter
     @Path("stats_provider")
-    private String stats = "none";
+    private final String stats = "none";
 
     @Getter
     @Path("reward")

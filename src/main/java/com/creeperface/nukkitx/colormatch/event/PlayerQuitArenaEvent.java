@@ -10,7 +10,7 @@ public class PlayerQuitArenaEvent extends PlayerEvent {
     private static final HandlerList handlers = new HandlerList();
 
     @Getter
-    private Arena arena;
+    private final Arena arena;
 
     public static HandlerList getHandlers() {
         return handlers;

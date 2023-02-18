@@ -6,10 +6,10 @@ import cn.nukkit.entity.Attribute;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.data.EntityMetadata;
 import cn.nukkit.level.Location;
-import cn.nukkit.math.NukkitRandom;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.network.protocol.*;
 import cn.nukkit.plugin.Plugin;
+import cn.nukkit.utils.Utils;
 import lombok.Getter;
 
 import java.util.HashMap;
@@ -22,17 +22,16 @@ public class BossBar {
 
     public static final int WITHER_ID = 52;
 
-    private Plugin plugin;
+    private final Plugin plugin;
     @Getter
-    private Map<String, Player> players = new HashMap<>();
+    private final Map<String, Player> players = new HashMap<>();
     public final long id;
     private int health = 1;
     private int maxHealth = 600;
 
-    private EntityMetadata metadata;
-    private BossEventPacket permanentPacket = new BossEventPacket();
-    private UpdateAttributesPacket attributesPacket = new UpdateAttributesPacket();
-    private NukkitRandom random = new NukkitRandom();
+    private final EntityMetadata metadata;
+    private final BossEventPacket permanentPacket = new BossEventPacket();
+    private final UpdateAttributesPacket attributesPacket = new UpdateAttributesPacket();
 
     public BossBar(Plugin plugin) {
         this.plugin = plugin;
@@ -41,15 +40,14 @@ public class BossBar {
         this.permanentPacket.bossEid = this.id;
         this.permanentPacket.type = 0;
 
-        BossEventPacket permanentPacketUpdate = new BossEventPacket();
+        /*BossEventPacket permanentPacketUpdate = new BossEventPacket();
         permanentPacketUpdate.type = 1;
         permanentPacketUpdate.color = 0x4286f4;
-        permanentPacketUpdate.overlay = 0x4286f4;
+        permanentPacketUpdate.overlay = 0x4286f4;*/
 
         this.attributesPacket.entityId = this.id;
         this.attributesPacket.entries = new Attribute[]{Attribute.getAttribute(4).setMaxValue(this.maxHealth).setValue(this.getHealth())};
-        this.attributesPacket.encode();
-        this.attributesPacket.isEncoded = true;
+        //this.attributesPacket.tryEncode();
 
         plugin.getServer().getScheduler().scheduleDelayedRepeatingTask(plugin, BossBar.this::update, 10, 10);
     }
@@ -139,23 +137,21 @@ public class BossBar {
         pk.metadata = this.metadata;
 
         this.attributesPacket.entries[0].setMaxValue(this.maxHealth).setValue(this.getHealth());
-        this.attributesPacket.encode();
-        this.attributesPacket.isEncoded = true;
+        //this.attributesPacket.tryEncode();
 
         plugin.getServer().batchPackets(players.values().toArray(new Player[0]), new DataPacket[]{this.attributesPacket, pk});
     }
 
     public void updateHealth() {
         this.attributesPacket.entries[0].setMaxValue(this.maxHealth).setValue(this.getHealth());
-        this.attributesPacket.encode();
-        this.attributesPacket.isEncoded = true;
+        //this.attributesPacket.tryEncode();
 
         Server.broadcastPacket(this.players.values(), this.attributesPacket);
     }
 
     public Vector3 getDirectionVector(Player p) {
         double pitch = 1.5707963267948966D;
-        double yaw = (p.getYaw() + this.random.nextRange(-10, 10) + 90) * 3.141592653589793D / 180.0D;
+        double yaw = (p.getYaw() + Utils.nukkitRandom.nextRange(-10, 10) + 90) * 3.141592653589793D / 180.0D;
         double x = Math.sin(pitch) * Math.cos(yaw);
         double z = Math.sin(pitch) * Math.sin(yaw);
         double y = Math.cos(pitch);

@@ -98,7 +98,7 @@ public class ColorMatch extends PluginBase {
     }
 
     public static String getPrefix() {
-        return "\u00A79[\u00A7cCM\u00A79] ";
+        return "§9[§cCM§9] ";
     }
 
     public boolean registerArena(String name, File file) {
@@ -139,7 +139,7 @@ public class ColorMatch extends PluginBase {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().toLowerCase().equals("colormatch")) {
+        if (cmd.getName().equals("colormatch")) {
             if (args.length < 1/* && !args[0].toLowerCase().equals("help")*/) {
                 sender.sendMessage(getHelp(sender, 0));
                 return true;
@@ -350,9 +350,9 @@ public class ColorMatch extends PluginBase {
                         int z;
 
                         try {
-                            x = Integer.valueOf(args[1]);
-                            y = Integer.valueOf(args[2]);
-                            z = Integer.valueOf(args[3]);
+                            x = Integer.parseInt(args[1]);
+                            y = Integer.parseInt(args[2]);
+                            z = Integer.parseInt(args[3]);
                         } catch (NumberFormatException e) {
                             sender.sendMessage(getLanguage().translateString("commands.help.setlobby_player"));
                             break;

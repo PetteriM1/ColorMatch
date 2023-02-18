@@ -6,6 +6,7 @@ import cn.nukkit.level.Level;
 import cn.nukkit.level.Position;
 import cn.nukkit.level.generator.Generator;
 import cn.nukkit.math.AxisAlignedBB;
+import cn.nukkit.math.SimpleAxisAlignedBB;
 import cn.nukkit.utils.Config;
 import com.creeperface.nukkitx.colormatch.ColorMatch;
 import com.creeperface.nukkitx.colormatch.utils.Utils;
@@ -226,7 +227,7 @@ public class Configuration extends Config {
 
     public void recalculateBoundingBox() {
         if (this.floorPos != null) {
-            this.floor = new AxisAlignedBB(floorPos.getFloorX() - (radius * 3) - 1, floorPos.getFloorY(), floorPos.getFloorZ() - (radius * 3) - 1, floorPos.getFloorX() + (radius * 3) + 1, floorPos.getFloorY(), floorPos.getFloorZ() + (radius * 3) + 1);
+            this.floor = new SimpleAxisAlignedBB(floorPos.getFloorX() - (radius * 3) - 1, floorPos.getFloorY(), floorPos.getFloorZ() - (radius * 3) - 1, floorPos.getFloorX() + (radius * 3) + 1, floorPos.getFloorY(), floorPos.getFloorZ() + (radius * 3) + 1);
         }
     }
 }

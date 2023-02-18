@@ -21,7 +21,7 @@ import java.util.Arrays;
 
 class ArenaListener implements Listener {
 
-    private Arena plugin;
+    private final Arena plugin;
 
     public ArenaListener(Arena plugin) {
         this.plugin = plugin;
