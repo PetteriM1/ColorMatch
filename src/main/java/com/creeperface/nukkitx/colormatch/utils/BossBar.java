@@ -53,7 +53,7 @@ public class BossBar {
     }
 
     public void addPlayer(Player p) {
-        this.players.put(p.getName().toLowerCase(), p);
+        this.players.put(p.getName(), p);
         Location pos = p.add(this.getDirectionVector(p).normalize().multiply(-15));
         AddEntityPacket pk = new AddEntityPacket();
 
@@ -93,7 +93,7 @@ public class BossBar {
     }
 
     public void removePlayer(String name) {
-        this.players.remove(name.toLowerCase());
+        this.players.remove(name);
     }
 
     public void update() {

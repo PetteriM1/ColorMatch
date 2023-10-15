@@ -14,11 +14,11 @@ public abstract class ArenaManager extends Configuration {
     protected Arena plugin;
 
     public boolean inArena(Player p) {
-        return plugin.players.containsKey(p.getName().toLowerCase());
+        return plugin.players.containsKey(p.getName());
     }
 
     public boolean isSpectator(Player p) {
-        return plugin.spectators.containsKey(p.getName().toLowerCase());
+        return plugin.spectators.containsKey(p.getName());
     }
 
     public void checkLobby() {

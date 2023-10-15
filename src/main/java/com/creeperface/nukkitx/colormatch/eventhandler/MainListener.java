@@ -48,7 +48,7 @@ public class MainListener implements Listener {
         Set<CommandSender> recipients = new HashSet<>();
 
         for(CommandSender sender : recipients){
-            if(plugin.players.containsKey(sender.getName().toLowerCase()) || plugin.spectators.containsKey(sender.getName().toLowerCase())){
+            if(plugin.players.containsKey(sender.getName()) || plugin.spectators.containsKey(sender.getName())){
                 recipients.remove(sender);
             }
         }
@@ -65,6 +65,8 @@ public class MainListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onInteract(PlayerInteractEvent e) {
+        if (!plugin.conf.joinSignsEnabled) return;
+
         Player p = e.getPlayer();
         Block b = e.getBlock();
 
@@ -73,7 +75,7 @@ public class MainListener implements Listener {
         }
 
         if (b instanceof BlockSignPost) {
-            BlockEntitySign sign = (BlockEntitySign) b.getLevel().getBlockEntity(b);
+            BlockEntitySign sign = (BlockEntitySign) b.getLevel().getBlockEntityIfLoaded(b);
 
             if (sign == null) {
                 return;

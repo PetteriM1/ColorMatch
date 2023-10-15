@@ -54,7 +54,7 @@ public class Arena extends ArenaManager implements Listener {
     protected ArenaSchedule scheduler;
 
     @Getter
-    protected String name = "";
+    protected String name;
 
     protected int currentColor = 0;
 
@@ -167,7 +167,7 @@ public class Arena extends ArenaManager implements Listener {
 
         new ArrayList<>(players.values()).forEach(p -> removeFromArena(p, false));
 
-        new ArrayList<>(spectators.values()).forEach(p -> removeSpectator(p));
+        new ArrayList<>(spectators.values()).forEach(this::removeSpectator);
 
         this.round = -1;
         scheduler.time = 0;
@@ -235,7 +235,7 @@ public class Arena extends ArenaManager implements Listener {
         if (phase == PHASE_GAME) {
             SavedPlayer save = new SavedPlayer();
             save.save(p);
-            saves.put(p.getName().toLowerCase(), save);
+            saves.put(p.getName(), save);
 
             this.addSpectator(p);
             return;
@@ -256,14 +256,14 @@ public class Arena extends ArenaManager implements Listener {
         messageArenaPlayers(plugin.getLanguage().translateString("game.join_others", p.getDisplayName(), String.valueOf(players.size() + 1), String.valueOf(plugin.conf.getMaxPlayers())));
 
         resetPlayer(p);
-        this.players.put(p.getName().toLowerCase(), p);
+        this.players.put(p.getName(), p);
         updateJoinSign();
 
         p.teleport(getStartPos().add(0.5, 0, 0.5));
 
         SavedPlayer save = new SavedPlayer();
         save.save(p);
-        saves.put(p.getName().toLowerCase(), save);
+        saves.put(p.getName(), save);
 
         /*this.bossBar.updateText(plugin.getLanguage().translateString("general.waiting_players", false, this.players.size() + "", plugin.conf.getMaxPlayers() + ""));
         this.bossBar.updateInfo();
@@ -282,7 +282,7 @@ public class Arena extends ArenaManager implements Listener {
         resetPlayer(p);
 
         messageArenaPlayers(plugin.getLanguage().translateString("game.death", p.getDisplayName(), String.valueOf(players.size() - 1)));
-        players.remove(p.getName().toLowerCase());
+        players.remove(p.getName());
 
         if (this.players.size() <= 2) {
             this.winners.add(new WinnerEntry(p));
@@ -309,7 +309,7 @@ public class Arena extends ArenaManager implements Listener {
     }
 
     public void removeFromArena(Player p, boolean message, boolean tp) {
-        this.players.remove(p.getName().toLowerCase());
+        this.players.remove(p.getName());
 
         PlayerQuitArenaEvent ev = new PlayerQuitArenaEvent(p, this);
         plugin.getServer().getPluginManager().callEvent(ev);
@@ -333,7 +333,7 @@ public class Arena extends ArenaManager implements Listener {
         this.bossBar.updateInfo();*/
 
         if (plugin.conf.saveInventory) {
-            SavedPlayer save = saves.remove(p.getName().toLowerCase());
+            SavedPlayer save = saves.remove(p.getName());
 
             if (save != null) {
                 save.load(p);
@@ -359,18 +359,18 @@ public class Arena extends ArenaManager implements Listener {
         //bossBar.addPlayer(p);
         //bossBar.updateInfo();
         //p.setDisplayName(TextFormat.GRAY + "[" + TextFormat.YELLOW + "SPECTATOR" + TextFormat.GRAY + "] " + TextFormat.WHITE + TextFormat.RESET + " " + p.getDisplayName());
-        this.spectators.put(p.getName().toLowerCase(), p);
+        this.spectators.put(p.getName(), p);
     }
 
     public void removeSpectator(Player p) {
         //p.setDisplayName(p.getDisplayName().replaceAll(TextFormat.GRAY + "[" + TextFormat.YELLOW + "SPECTATOR" + TextFormat.GRAY + "] " + TextFormat.WHITE + TextFormat.RESET + " ", ""));
-        this.spectators.remove(p.getName().toLowerCase());
+        this.spectators.remove(p.getName());
         resetPlayer(p);
         //this.bossBar.removePlayer(p);
         p.teleport(plugin.conf.getMainLobby());
 
         if (plugin.conf.saveInventory) {
-            SavedPlayer save = saves.remove(p.getName().toLowerCase());
+            SavedPlayer save = saves.remove(p.getName());
 
             if (save != null) {
                 save.load(p);

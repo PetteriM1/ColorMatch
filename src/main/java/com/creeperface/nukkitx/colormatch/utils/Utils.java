@@ -20,7 +20,7 @@ public class Utils {
         for (char chr : msg.toCharArray()) {
             String str = Character.toString(chr);
 
-            if (str.toLowerCase().equals("§")) {
+            if (str.equals("§")) {
                 if ("0123456789AaBbCcDdEeFf".indexOf(msg.charAt(i + 1)) != -1) {
                     lastColor = msg.charAt(i + 1);
                 }
