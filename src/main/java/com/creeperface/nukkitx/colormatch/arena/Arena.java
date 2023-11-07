@@ -1,6 +1,7 @@
 package com.creeperface.nukkitx.colormatch.arena;
 
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockAir;
 import cn.nukkit.event.HandlerList;
@@ -158,6 +159,9 @@ public class Arena extends ArenaManager implements Listener {
         this.phase = PHASE_GAME;
         updateJoinSign();
         selectNewColor();
+        if (Server.getInstance().suomiCraftPEMode()) {
+            this.sendNewColor();
+        }
 
         //this.bossBar.updateInfo();
     }
@@ -383,21 +387,28 @@ public class Arena extends ArenaManager implements Listener {
     public void selectNewColor() {
         this.currentColor = Utils.random.nextInt(15);
 
-        Item item = new ItemBlock(getFloorMaterial(), currentColor);
-        item.setDamage(currentColor);
+        if (!Server.getInstance().suomiCraftPEMode()) {
+            this.sendNewColor();
+        }
+    }
+
+    void sendNewColor() {
+        players.values().forEach((Player p) -> p.level.addSound(p, Sound.RANDOM_CLICK, 1f, 1f, p));
+
+        Item item = new ItemBlock(getFloorMaterial(), this.currentColor);
 
         players.values().forEach((Player p) -> {
             PlayerInventory inv = p.getInventory();
 
             for (int i = 0; i < 9 && i < inv.getSize(); i++) {
-                inv.setItem(i, item);
-                inv.setHeldItemSlot(i);
+                inv.setItem(i, item, false);
+                //inv.setHeldItemSlot(i);
             }
 
             inv.sendContents(p);
 
-            inv.setItemInHand(item.clone());
-            inv.sendHeldItem(p);
+            //inv.setItemInHand(item.clone());
+            //inv.sendHeldItem(p);
         });
 
         /*this.bossBar.setHealth(colorChangeInterval * 10);
@@ -457,6 +468,8 @@ public class Arena extends ArenaManager implements Listener {
     }
 
     public void removeFloor() {
+        players.values().forEach((Player p) -> p.level.addSound(p, Sound.MOB_SHULKER_BULLET_HIT, 1f, 1f, p));
+
         Vector3 v = new Vector3();
         BlockAir air = new BlockAir();
 

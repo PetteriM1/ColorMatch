@@ -1,7 +1,9 @@
 package com.creeperface.nukkitx.colormatch.arena;
 
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.entity.Attribute;
+import cn.nukkit.level.Sound;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -18,6 +20,7 @@ class ArenaSchedule implements Runnable {
     public int id = 0;
 
     public boolean floor = true;
+    public boolean cooldown = false;
 
     public int floorResetedTick;
 
@@ -46,11 +49,26 @@ class ArenaSchedule implements Runnable {
 
     private void game() {
         if (time >= plugin.plugin.conf.getMaxGameTime()) {
+            plugin.players.values().forEach((Player p) -> p.level.addSound(p, Sound.RANDOM_FIZZ, 1f, 1f, p));
             plugin.stop();
             return;
         }
 
         int interval = plugin.getColorChangeInterval();
+
+        if (Server.getInstance().suomiCraftPEMode()) {
+            if (time > interval << 2) {
+                interval--;
+            }
+            if (cooldown) {
+                cooldown = false;
+                plugin.sendNewColor();
+                int finalInterval = interval;
+                plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE).setValue(1f)));
+                plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE_LEVEL).setValue(finalInterval)));
+                return;
+            }
+        }
 
         if (colorTime > 0 && (colorTime % interval) == 0) {
             if (floor) {
@@ -60,6 +78,7 @@ class ArenaSchedule implements Runnable {
                 //this.plugin.bossBar.updateInfo();
             } else {
                 floor = true;
+                cooldown = true;
                 plugin.selectNewColor();
                 plugin.resetFloor();
                 floorResetedTick = plugin.plugin.getServer().getTick();
@@ -68,8 +87,9 @@ class ArenaSchedule implements Runnable {
             plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE).setValue(0)));
             plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE_LEVEL).setValue(0)));
         } else if (floor) {
-            plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE).setValue((float) (interval - (colorTime % interval)) / interval)));
-            plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE_LEVEL).setValue(interval - (colorTime % interval))));
+            int finalInterval = interval;
+            plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE).setValue((float) (finalInterval - (colorTime % finalInterval)) / finalInterval)));
+            plugin.players.values().forEach((Player p) -> p.setAttribute(Attribute.getAttribute(Attribute.EXPERIENCE_LEVEL).setValue(finalInterval - (colorTime % finalInterval))));
         }
 
 //        if (floor) {
