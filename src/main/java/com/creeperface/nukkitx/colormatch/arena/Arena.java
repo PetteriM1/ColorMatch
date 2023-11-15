@@ -214,7 +214,7 @@ public class Arena extends ArenaManager implements Listener {
                 WinnerEntry winner = winners.removeLast();
 
                 long timeDiff = (winner.time - startTime) / 1000;
-                replace = winner.player.getDisplayName() + TextFormat.GRAY + '(' + String.format("%02d:%02d", timeDiff / 60, (timeDiff % 60)) + ')';
+                replace = winner.player.getDisplayName() + TextFormat.GRAY + " (" + String.format("%02d:%02d", timeDiff / 60, (timeDiff % 60)) + ')';
             }
 
             message = message.replaceAll("%" + i, replace);
@@ -484,6 +484,20 @@ public class Arena extends ArenaManager implements Listener {
                 }
             }
         }*/
+
+        if (Server.getInstance().suomiCraftPEMode()) {
+            Item item = Item.get(0);
+
+            players.values().forEach((Player p) -> {
+                PlayerInventory inv = p.getInventory();
+
+                for (int i = 0; i < inv.getSize(); i++) {
+                    inv.setItem(i, item, false);
+                }
+
+                inv.sendContents(p);
+            });
+        }
 
         for (int x = (int) getFloor().getMinX() + 1; x <= getFloor().getMaxX() - 1; x += 3) {
             for (int z = (int) getFloor().getMinZ() + 1; z <= getFloor().getMaxZ() - 1; z += 3) {
