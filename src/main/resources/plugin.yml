@@ -1,5 +1,5 @@
 name: ColorMatch
-version: "Custom"
+version: "SC241"
 api: ["9.9.9"]
 main: com.creeperface.nukkitx.colormatch.ColorMatch
 author: "CreeperFace"

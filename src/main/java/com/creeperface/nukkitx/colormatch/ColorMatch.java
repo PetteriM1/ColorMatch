@@ -17,6 +17,7 @@ import com.creeperface.nukkitx.colormatch.arena.Arena;
 import com.creeperface.nukkitx.colormatch.economy.EconomyAPIProvider;
 import com.creeperface.nukkitx.colormatch.economy.EconomyProvider;
 import com.creeperface.nukkitx.colormatch.eventhandler.MainListener;
+import com.creeperface.nukkitx.colormatch.eventhandler.SignListener;
 import com.creeperface.nukkitx.colormatch.lang.BaseLang;
 import com.creeperface.nukkitx.colormatch.stats.*;
 import com.creeperface.nukkitx.colormatch.utils.ArenaBuilder;
@@ -82,6 +83,11 @@ public class ColorMatch extends PluginBase {
         reward.init(this, conf.getReward());
 
         this.getServer().getPluginManager().registerEvents(new MainListener(this), this);
+
+        if (conf.joinSignsEnabled) {
+            this.getServer().getPluginManager().registerEvents(new SignListener(this), this);
+        }
+
         this.registerArenas();
     }
 

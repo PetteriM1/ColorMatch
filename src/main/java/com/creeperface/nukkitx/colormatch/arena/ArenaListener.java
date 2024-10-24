@@ -1,9 +1,6 @@
 package com.creeperface.nukkitx.colormatch.arena;
 
 import cn.nukkit.Player;
-import cn.nukkit.block.Block;
-import cn.nukkit.block.BlockSignPost;
-import cn.nukkit.blockentity.BlockEntitySign;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
@@ -16,8 +13,10 @@ import cn.nukkit.event.entity.EntityDamageEvent.DamageCause;
 import cn.nukkit.event.player.*;
 import cn.nukkit.event.player.PlayerInteractEvent.Action;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.regex.Pattern;
 
 class ArenaListener implements Listener {
 
@@ -38,13 +37,9 @@ class ArenaListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
     public void onInteract(PlayerInteractEvent e) {
         Action action = e.getAction();
-
-        if (e.isCancelled()) {
-            return;
-        }
 
         if (action != Action.RIGHT_CLICK_BLOCK && action != Action.LEFT_CLICK_BLOCK) {
             return;
@@ -54,65 +49,32 @@ class ArenaListener implements Listener {
 
         if (plugin.inArena(p)) {
             e.setCancelled();
-            return;
-        }
-
-        Block b = e.getBlock();
-
-        if (b instanceof BlockSignPost && b.equals(plugin.getJoinSign())) {
-            e.setCancelled();
-
-            if (!p.hasPermission("colormatch.sign.use")) {
-                p.sendMessage(plugin.plugin.getLanguage().translateString("permission_message", false));
-                return;
-            }
-            plugin.addToArena(p);
-            e.setCancelled();
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
     public void onBlockBreak(BlockBreakEvent e) {
         Player p = e.getPlayer();
-        Block b = e.getBlock();
 
         if (plugin.inArena(p) || plugin.isSpectator(p)) {
             e.setCancelled();
-            return;
-        }
-
-        if (b instanceof BlockSignPost) {
-            BlockEntitySign sign = (BlockEntitySign) b.getLevel().getBlockEntity(b);
-
-            if (sign == null) {
-                return;
-            }
-
-            //String line1 = sign.getText()[0];
-
-            if (b.equals(plugin.getJoinSign())) {
-                if (!p.hasPermission("colormatch.sign.break")) {
-                    p.sendMessage(plugin.plugin.getLanguage().translateString("permission_message", false));
-                    e.setCancelled();
-                }
-            }
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
     public void onBlockPlace(BlockPlaceEvent e) {
         Player p = e.getPlayer();
 
-        if (plugin.inArena(p) || plugin.isSpectator(p)) {
+        if (plugin.inArena(p)) {
             e.setCancelled();
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
     public void onItemDrop(PlayerDropItemEvent e) {
         Player p = e.getPlayer();
 
-        if (plugin.inArena(p) || plugin.isSpectator(p)) {
+        if (plugin.inArena(p)) {
             e.setCancelled();
         }
     }
@@ -163,14 +125,10 @@ class ArenaListener implements Listener {
         plugin.messageArenaPlayers(prefix.replaceAll("\\{PLAYER}", p.getDisplayName()).replaceAll("\\{MESSAGE}", e.getMessage()));
     }*/
 
-    private static final ArrayList<DamageCause> allowedCauses = new ArrayList<>(Arrays.asList(DamageCause.VOID, DamageCause.FALL, DamageCause.FIRE, DamageCause.FIRE_TICK, DamageCause.LAVA, DamageCause.CONTACT));
+    private static final Set<DamageCause> allowedCauses = new HashSet<>(Arrays.asList(DamageCause.VOID, DamageCause.FALL, DamageCause.FIRE, DamageCause.FIRE_TICK, DamageCause.LAVA, DamageCause.CONTACT));
 
-    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
     public void onDamage(EntityDamageEvent e) {
-        if (e.isCancelled()) {
-            return;
-        }
-
         Entity entity = e.getEntity();
         Player p;
         DamageCause cause = e.getCause();
@@ -227,31 +185,36 @@ class ArenaListener implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
     public void onFoodChange(PlayerFoodLevelChangeEvent e) {
         Player p = e.getPlayer();
 
-        if (plugin.inArena(p) || plugin.isSpectator(p)) {
-            if (e.getFoodLevel() >= p.getFoodData().getLevel()) {
-                return;
-            }
+        if (e.getFoodLevel() >= p.getFoodData().getLevel()) {
+            return;
+        }
 
+        if (plugin.inArena(p)) {
             e.setCancelled(true);
         }
     }
 
-    @EventHandler
+    private static final Pattern FILTER_EMPTY_PATTERN = Pattern.compile("\\s+");
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
     public void onCommand(PlayerCommandPreprocessEvent e) {
         Player p = e.getPlayer();
-        String cmd = e.getMessage().toLowerCase().replaceAll("\\s+","");
 
-        if ((plugin.inArena(p) || plugin.isSpectator(p)) && !cmd.startsWith("/cm") && !cmd.startsWith("/hub") && !cmd.startsWith("/spawn") && !cmd.startsWith("/lobby") && !p.isOp()) {
-            p.sendMessage(plugin.plugin.getLanguage().translateString("game.commands"));
-            e.setCancelled(true);
+        if (plugin.inArena(p) || plugin.isSpectator(p)) {
+            String cmd = FILTER_EMPTY_PATTERN.matcher(e.getMessage().toLowerCase()).replaceAll("");
+
+            if (!p.isOp() && !cmd.startsWith("/cm") && !cmd.startsWith("/hub") && !cmd.startsWith("/spawn") && !cmd.startsWith("/lobby")) {
+                p.sendMessage(plugin.plugin.getLanguage().translateString("game.commands"));
+                e.setCancelled(true);
+            }
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
     public void onTeleport(PlayerTeleportEvent e) {
         Player p = e.getPlayer();
 
@@ -259,7 +222,7 @@ class ArenaListener implements Listener {
             return;
         }
 
-        if (!e.getTo().getLevel().equals(plugin.level) && e.getFrom().getLevel().equals(plugin.level)) {
+        if (e.getFrom().getLevel().equals(plugin.level) && !e.getTo().getLevel().equals(plugin.level)) {
             if (plugin.inArena(p) || plugin.isSpectator(p)) {
                 plugin.removeFromArena(p, true, false);
             }

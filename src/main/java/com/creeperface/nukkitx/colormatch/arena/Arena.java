@@ -292,7 +292,7 @@ public class Arena extends ArenaManager implements Listener {
             this.winners.add(new WinnerEntry(p));
         }
 
-        if (players.size() > 0) {
+        if (!players.isEmpty()) {
             plugin.getStats().updateStats(p.getName(), false, getRound());
         }
 

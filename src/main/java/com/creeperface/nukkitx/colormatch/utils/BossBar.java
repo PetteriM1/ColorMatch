@@ -151,7 +151,7 @@ public class BossBar {
 
     public Vector3 getDirectionVector(Player p) {
         double pitch = 1.5707963267948966D;
-        double yaw = (p.getYaw() + Utils.nukkitRandom.nextRange(-10, 10) + 90) * 3.141592653589793D / 180.0D;
+        double yaw = (p.getYaw() + Utils.rand(-10, 10) + 90) * 3.141592653589793D / 180.0D;
         double x = Math.sin(pitch) * Math.cos(yaw);
         double z = Math.sin(pitch) * Math.sin(yaw);
         double y = Math.cos(pitch);
